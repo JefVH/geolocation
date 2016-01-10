@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: geolocation
+        psr4_prefix: geolocation
+        src_path: app

@@ -1,0 +1,1 @@
+{"virtualbox":{"/home/vagrant/geolocation":{"type":null,"mount_options":[],"guestpath":"/home/vagrant/geolocation","hostpath":"/Users/jefvanhoyweghen/Documents/Bachelorproef/geolocation","disabled":false},"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/jefvanhoyweghen/Documents/Bachelorproef/geolocation","disabled":false}}}
