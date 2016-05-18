@@ -70,7 +70,7 @@ class TrackController extends Controller
             $coords_array = [];
 
             foreach ($coordinates as $coord) {
-                $coordObject =  collect([$coord->lat, $coord->lon]);
+                $coordObject = collect([$coord->lat, $coord->lon]);
                 array_push($coords_array, $coordObject);
             }
 
