@@ -11,6 +11,7 @@ use geolocation\Http\Controllers\Controller;
 use geolocation\Track;
 use geolocation\Coordinate;
 use geolocation\Stop;
+use Illuminate\Support\Facades\DB;
 
 class TrackController extends Controller
 {
