@@ -73,7 +73,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($track->coordinates as $coordinate)
+                                    @foreach($coordinates as $coordinate)
                                         <tr>
                                             <td>{{ $coordinate->lat }}</td>
                                             <td>{{ $coordinate->lon }}</td>
