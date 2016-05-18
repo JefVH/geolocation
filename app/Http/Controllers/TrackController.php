@@ -66,19 +66,16 @@ class TrackController extends Controller
 
         $index = 0;
 
-        if($coordinates->count() > 0)
-        {
+        if ($coordinates->count() > 0) {
             $coords_array = [];
 
-            foreach($coordinates as $coord)
-            {
+            foreach ($coordinates as $coord) {
                 array_push($coords_array, [$coord->lat, $coord->lon]);
             }
 
-            if(count($coords_array)%2 === 0){
+            if (count($coords_array)%2 === 0) {
                 $index = (count($coords_array)-1)/2;
-            }
-            else{
+            } else {
                 $index = count($coords_array)/2;
             }
 
@@ -86,10 +83,8 @@ class TrackController extends Controller
                     ->with('track', $track)
                     ->with('coordinates', $coordinates)
                     ->with('map_coordinates', json_encode($coords_array))
-                    ->with('map_center', $coords_array[$index]);            
-        }
-        else
-        {
+                    ->with('map_center', $coords_array[$index]);
+        } else {
             return view('view-track', compact('track'));
         }
     }
@@ -132,12 +127,10 @@ class TrackController extends Controller
     {
         $track = Track::find($id);
 
-        if($track)
-        {
+        if ($track) {
             $coords =  json_decode($request->get('coords'));
 
-            foreach($coords as $coord)
-            {
+            foreach ($coords as $coord) {
                 $datetime = new Carbon($coord[2]);
 
                 $coordinate = new Coordinate([
@@ -155,9 +148,7 @@ class TrackController extends Controller
             }
 
             return response()->json(['success' => true]);
-        }
-        else
-        {
+        } else {
             return response()->json(['success' => false]);
         }
     }
@@ -168,17 +159,18 @@ class TrackController extends Controller
         $distance = null;
         $stop_id = null;
 
-        foreach($stops as $stop)
-        {
-            $calculated_distance = $this->vincentyGreatCircleDistance($coordinate->lat, $coordinate->lon, $stop->lat, $stop->lon);
+        foreach ($stops as $stop) {
+            $calculated_distance = $this->vincentyGreatCircleDistance(
+                $coordinate->lat,
+                $coordinate->lon,
+                $stop->lat,
+                $stop->lon
+            );
 
-            if($distance == null)
-            {
+            if ($distance == null) {
                 $distance = $calculated_distance;
                 $stop_id = $stop->id;
-            }
-            else if($calculated_distance < $distance)
-            {
+            } elseif ($calculated_distance < $distance) {
                 $distance = $calculated_distance;
                 $stop_id = $stop->id;
             }
@@ -187,8 +179,13 @@ class TrackController extends Controller
         return [$distance, $stop_id];
     }
 
-    public static function vincentyGreatCircleDistance($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371000)
-    {
+    public static function vincentyGreatCircleDistance(
+        $latitudeFrom,
+        $longitudeFrom,
+        $latitudeTo,
+        $longitudeTo,
+        $earthRadius = 6371000
+    ) {
         // convert from degrees to radians
         $latFrom = deg2rad($latitudeFrom);
         $lonFrom = deg2rad($longitudeFrom);
@@ -201,6 +198,7 @@ class TrackController extends Controller
         $b = sin($latFrom) * sin($latTo) + cos($latFrom) * cos($latTo) * cos($lonDelta);
 
         $angle = atan2(sqrt($a), $b);
+
         return $angle * $earthRadius;
     }
 }

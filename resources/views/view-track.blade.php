@@ -51,6 +51,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
+                        @if(isset($map_coordinates))<pre>{{ $map_coordinates }}</pre>@endif
                         <h3>Information</h3>
                         <label>Name</label>
                         <p>{{ $track->name }}</p>
@@ -152,7 +153,7 @@
             <script src="{{ asset('js/maplace.min.js') }}"></script>
             <script>
                 new Maplace({
-                    locations: [],
+                    locations: {{ $map_coordinates }},
                     map_div: '#map',
                     type: 'polyline'
                 }).Load();
