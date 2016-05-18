@@ -149,7 +149,7 @@
             };
         </script>
         @if(isset($coordinates))
-            <script src="http://maps.google.com/maps/api/js?libraries=geometry&v=3.22&key=AIzaSyDO1gmbrToFXG9hV3GS4UoT_V-03Ks29pc"></script>
+            <script src="//maps.google.com/maps/api/js?libraries=geometry&v=3.22&key=AIzaSyDO1gmbrToFXG9hV3GS4UoT_V-03Ks29pc"></script>
             <script src="{{ asset('js/maplace.min.js') }}"></script>
             <script>
                 new Maplace({
