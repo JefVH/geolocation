@@ -63,15 +63,19 @@ class TrackController extends Controller
         $track = Track::find($id);
 
         $coordinates = $track->coordinates()->orderBy('time', 'asc')->get();
+        $coordinatesFiltered = DB::table('coordinates')
+            ->select('lat', 'lon')
+            ->where('track_id', $track->id)
+            ->orderBy('time', 'asc')
+            ->get();
 
         $index = 0;
 
-        if ($coordinates->count() > 0) {
+        if (count($coordinatesFiltered) > 0) {
             $coords_array = [];
 
-            foreach ($coordinates as $coord) {
-                $coordObject = collect([$coord->lat, $coord->lon]);
-                array_push($coords_array, $coordObject);
+            foreach ($coordinatesFiltered as $coord) {
+                array_push($coords_array, $coord);
             }
 
             if (count($coords_array)%2 === 0) {
