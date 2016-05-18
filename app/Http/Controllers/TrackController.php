@@ -85,10 +85,13 @@ class TrackController extends Controller
                 $index = count($coords_array)/2;
             }
 
+            $mapCoordinatesJsonRaw = json_encode($coords_array);
+            $mapCoordinatesJson = preg_replace('/"([^"]+)"\s*:\s*/', '$1:', $mapCoordinatesJsonRaw);
+
             return view('view-track')
                     ->with('track', $track)
                     ->with('coordinates', $coordinates)
-                    ->with('map_coordinates', json_encode($coords_array))
+                    ->with('map_coordinates', $mapCoordinatesJson)
                     ->with('map_center', $coords_array[$index]);
         } else {
             return view('view-track', compact('track'));
