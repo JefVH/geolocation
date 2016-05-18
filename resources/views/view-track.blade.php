@@ -51,7 +51,6 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        @if(isset($map_coordinates))<pre>{{ $map_coordinates }}</pre>@endif
                         <h3>Information</h3>
                         <label>Name</label>
                         <p>{{ $track->name }}</p>
@@ -88,10 +87,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h3>Map</h3>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <div id="gmap_controls"></div>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-10">
                                 <div id="map" style="width: 100%; height: 600px;"></div>
                             </div>
                         </div>
