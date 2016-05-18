@@ -62,7 +62,7 @@ class TrackController extends Controller
     {
         $track = Track::find($id);
 
-        $coordinates = $track->coordinates;
+        $coordinates = $track->coordinates->orderBy('time')->get();
 
         $index = 0;
 
