@@ -88,7 +88,12 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h3>Map</h3>
-                            <div id="map"></div>
+                            <div class="col-md-4">
+                                <div id="gmap_controls"></div>
+                            </div>
+                            <div class="col-md-8">
+                                <div id="map" style="width: 100%; height: 600px;"></div>
+                            </div>
                         </div>
                     </div>
                 @endif
@@ -155,6 +160,10 @@
                 new Maplace({
                     locations: {{ $map_coordinates }},
                     map_div: '#map',
+                    controls_div: '#gmap_controls',
+                    controls_type: 'list',
+                    controls_on_map: false,
+                    view_all_text: 'All Coordinates',
                     type: 'polyline'
                 }).Load();
             </script>
