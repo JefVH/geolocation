@@ -11,6 +11,7 @@ use geolocation\Http\Controllers\Controller;
 use geolocation\Track;
 use geolocation\Coordinate;
 use geolocation\Stop;
+use Illuminate\Support\Facades\DB;
 
 class TrackController extends Controller
 {
@@ -63,14 +64,20 @@ class TrackController extends Controller
         $track = Track::find($id);
 
         $coordinates = $track->coordinates()->orderBy('time', 'asc')->get();
+        $filteredCoordinates = DB::table('coordinates')
+            ->select('lat', 'lon')
+            ->where('track_id', $track->id)
+            ->orderBy('time', 'asc')
+            ->get();
+
 
         $index = 0;
 
-        if ($coordinates->count() > 0) {
+        if ($filteredCoordinates->count() > 0) {
             $coords_array = [];
 
-            foreach ($coordinates as $coord) {
-                array_push($coords_array, [$coord->lat, $coord->lon]);
+            foreach ($filteredCoordinates as $coord) {
+                array_push($coords_array, $coord);
             }
 
             if (count($coords_array)%2 === 0) {
