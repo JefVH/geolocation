@@ -73,7 +73,7 @@ class TrackController extends Controller
 
         $index = 0;
 
-        if ($filteredCoordinates->count() > 0) {
+        if (count($filteredCoordinates) > 0) {
             $coords_array = [];
 
             foreach ($filteredCoordinates as $coord) {
