@@ -148,66 +148,14 @@ class TrackController extends Controller
                         'time'  => $datetime
                 ]);
 
-                $stop = $this->processCoordinate($coordinate);
-
-                $coordinate->stop_distance = $stop[0];
-                $coordinate->stop_id = $stop[1];
-
                 $track->coordinates()->save($coordinate);
             }
+
+            dd('ok');
 
             return response()->json(['success' => true]);
         } else {
             return response()->json(['success' => false]);
         }
-    }
-
-    public function processCoordinate(Coordinate $coordinate)
-    {
-        $stops = Stop::all();
-        $distance = null;
-        $stop_id = null;
-
-        foreach ($stops as $stop) {
-            $calculated_distance = $this->vincentyGreatCircleDistance(
-                $coordinate->lat,
-                $coordinate->lon,
-                $stop->lat,
-                $stop->lon
-            );
-
-            if ($distance == null) {
-                $distance = $calculated_distance;
-                $stop_id = $stop->id;
-            } elseif ($calculated_distance < $distance) {
-                $distance = $calculated_distance;
-                $stop_id = $stop->id;
-            }
-        }
-
-        return [$distance, $stop_id];
-    }
-
-    public static function vincentyGreatCircleDistance(
-        $latitudeFrom,
-        $longitudeFrom,
-        $latitudeTo,
-        $longitudeTo,
-        $earthRadius = 6371000
-    ) {
-        // convert from degrees to radians
-        $latFrom = deg2rad($latitudeFrom);
-        $lonFrom = deg2rad($longitudeFrom);
-        $latTo = deg2rad($latitudeTo);
-        $lonTo = deg2rad($longitudeTo);
-
-        $lonDelta = $lonTo - $lonFrom;
-        $a = pow(cos($latTo) * sin($lonDelta), 2) +
-        pow(cos($latFrom) * sin($latTo) - sin($latFrom) * cos($latTo) * cos($lonDelta), 2);
-        $b = sin($latFrom) * sin($latTo) + cos($latFrom) * cos($latTo) * cos($lonDelta);
-
-        $angle = atan2(sqrt($a), $b);
-
-        return $angle * $earthRadius;
     }
 }
