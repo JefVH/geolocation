@@ -116,6 +116,7 @@
                 $(this).hide();
                 $('#start-tracking').show();
                 $.geolocation.stop(tracker);
+                location.reload();
             });
 
             function addCoordinate(position)
