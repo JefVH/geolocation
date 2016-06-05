@@ -146,6 +146,7 @@
                     }
                     else
                     {
+                        $('#saving').hide();
                         $('#start-tracking').show();
                         alert('There was an error saving the tracking data');
                     }

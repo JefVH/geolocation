@@ -151,8 +151,6 @@ class TrackController extends Controller
                 $track->coordinates()->save($coordinate);
             }
 
-            dd('ok');
-
             return response()->json(['success' => true]);
         } else {
             return response()->json(['success' => false]);
