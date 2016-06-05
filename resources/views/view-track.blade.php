@@ -139,7 +139,7 @@
                 {
                     if(data.success)
                     {
-                        location.reload(true);
+                        console.log('Coordinate saved');
                     }
                     else
                     {
