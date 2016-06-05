@@ -134,7 +134,7 @@ class TrackController extends Controller
 
     public function saveCoordinate(Request $request, $id)
     {
-        dd($request);
+        dd($request->all());
 
         $track = Track::find($id);
 
