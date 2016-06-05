@@ -136,17 +136,15 @@
             function saveCoordinate(coordinate) {
                 var post_url = "coordinate";
 
-                var formData = new FormData();
-                formData.append('coordinate', coordinate);
-
-                $.ajax({
-                    url: post_url,
-                    data: formData,
-                    success: function (data) {
+                $.post(post_url, { coordinate: coordinate }, function(data)
+                {
+                    if(data.success)
+                    {
                         console.log('Coordinate saved');
-                    },
-                    error: function (data) {
-                        console.log('Error saving coordinate');
+                    }
+                    else
+                    {
+                        alert('There was an error saving the tracking data');
                     }
                 });
             };
