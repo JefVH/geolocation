@@ -139,15 +139,14 @@
                 var formData = new FormData();
                 formData.append('coordinate', coordinate);
 
-                $.post( post_url, formData, function(data)
-                {
-                    if(data.success)
-                    {
+                $.ajax({
+                    url: post_url,
+                    data: formData,
+                    success: function (data) {
                         console.log('Coordinate saved');
-                    }
-                    else
-                    {
-                        alert('There was an error saving the tracking data');
+                    },
+                    error: function (data) {
+                        console.log('Error saving coordinate');
                     }
                 });
             };
