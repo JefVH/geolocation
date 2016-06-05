@@ -134,14 +134,10 @@ class TrackController extends Controller
 
     public function saveCoordinate(Request $request, $id)
     {
-        dd($request->all());
-
         $track = Track::find($id);
 
         if ($track) {
-            $coord =  json_decode($request->get('coord'));
-
-            dd($coord);
+            $coord =  json_decode($request->get('coordinate'));
 
             $date = Carbon::parse($coord[2]);
 
