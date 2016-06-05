@@ -114,7 +114,7 @@
 
             $('#stop-tracking').on('click', function() {
                 $(this).hide();
-                $('#saving').show();
+                $('#start-tracking').show();
                 $.geolocation.stop(tracker);
             });
 
