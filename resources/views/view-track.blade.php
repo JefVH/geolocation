@@ -136,7 +136,7 @@
             function saveCoordinate(coordinate) {
                 var post_url = "coordinate";
 
-                $.post( post_url, { coordinate }, function(data)
+                $.post( post_url, { coordinate: coordinate }, function(data)
                 {
                     if(data.success)
                     {
