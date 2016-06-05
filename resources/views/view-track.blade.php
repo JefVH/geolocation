@@ -109,7 +109,7 @@
             $('#start-tracking').on('click', function() {
                 $(this).hide();
                 $('#stop-tracking').show();
-                tracker = $.geolocation.watch({win: addCoordinate, settings: {enableHighAccuracy: false}, fail: trackingFail});
+                tracker = $.geolocation.watch({win: addCoordinate, settings: {enableHighAccuracy: true}, fail: trackingFail});
             });
 
             $('#stop-tracking').on('click', function() {
