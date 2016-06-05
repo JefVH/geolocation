@@ -139,6 +139,8 @@ class TrackController extends Controller
         if ($track) {
             $coord =  json_decode($request->get('coord'));
 
+            dd($coord);
+
             $date = Carbon::parse($coord[2]);
 
             $coordinate = new Coordinate([
