@@ -40,7 +40,29 @@ class ProcessCoordinates extends Command
      */
     public function handle()
     {
+        $this->info('|-----------------------------|');
+        $this->info('|---- PROCESS COORDINATES ----|');
+        $this->info('|-----------------------------|');
+
         $coordinates = Coordinate::notProcessed()->get();
+
+        $coordinatesTable = [];
+        foreach ($coordinates as $coordinate) {
+            $coordinateArray = [];
+
+            $coordinateArray['track'] = $coordinate->track->name;
+            $coordinateArray['latitude'] = $coordinate->lat;
+            $coordinateArray['longitude'] = $coordinate->lon;
+            $coordinateArray['time'] = $coordinate->time;
+
+            array_push($coordinatesTable, $coordinateArray);
+        }
+
+        $headers = ['Track', 'Latitude', 'Longitude', 'Time'];
+
+        $this->table($headers, $coordinatesTable);
+
+        $bar = $this->output->createProgressBar(count($coordinates));
 
         foreach ($coordinates as $coordinate) {
             $stop = DB::select('SELECT *, SQRT(POW(69.1 * (lat - :lat), 2) + POW(69.1 * (:lon - lon) + COS(lat / 57.3), 2)) AS distance FROM stops ORDER BY distance ASC LIMIT 1', ['lat' => $coordinate->lat, 'lon' => $coordinate->lon]);
@@ -48,6 +70,11 @@ class ProcessCoordinates extends Command
             $coordinate->stop_id = $stop->id;
             $coordinate->stop_distance = $stop->distance;
             $coordinate->save();
+
+            $bar->advance();
+            $this->info('Coordinate ' . $coordinate->id . ' processed.');
         }
+
+        $bar->finish();
     }
 }
