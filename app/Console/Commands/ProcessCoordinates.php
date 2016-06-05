@@ -69,6 +69,7 @@ class ProcessCoordinates extends Command
 
             $coordinate->stop_id = $stop[0]->id;
             $coordinate->stop_distance = $stop[0]->distance;
+            $coordinate->processed = 1;
             $coordinate->save();
 
             $bar->advance();
