@@ -50,26 +50,30 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">{{ $track->name }}</div>
                                     <div class="panel-body">
-                                        <table class="table table-striped table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Latitude</th>
-                                                    <th>Longitude</th>
-                                                    <th>Nearest Stop</th>
-                                                    <th>Distance to stop (km)</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach($track->coordinates()->get() as $coordinate)
+                                        @if(!count($track->coordinates))
+                                            No coordinates found
+                                        @else
+                                            <table class="table table-striped table-hover">
+                                                <thead>
                                                     <tr>
-                                                        <td>{{ $coordinate->lat }}</td>
-                                                        <td>{{ $coordinate->lon }}</td>
-                                                        <td>{{ !isset($coordinate->stop->name) ? $coordinate->stop->name : '<i class="fa fa-cog"></i> Processing' }}</td>
-                                                        <td>{!! !isset($coordinate->stop_distance) ? $coordinate->stop_distance/1000 : '<i class="fa fa-cog"></i> Processing' !!}</td>
+                                                        <th>Latitude</th>
+                                                        <th>Longitude</th>
+                                                        <th>Nearest Stop</th>
+                                                        <th>Distance to stop (km)</th>
                                                     </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach($track->coordinates as $coordinate)
+                                                        <tr>
+                                                            <td>{{ $coordinate->lat }}</td>
+                                                            <td>{{ $coordinate->lon }}</td>
+                                                            <td>{{ !is_null($coordinate->stop_id) ? $coordinate->stop->name : '<i class="fa fa-cog"></i> Processing' }}</td>
+                                                            <td>{!! !is_null($coordinate->stop_distance) ? $coordinate->stop_distance/1000 : '<i class="fa fa-cog"></i> Processing' !!}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        @endif
                                     </div>
                                 </div>
                             @endforeach
