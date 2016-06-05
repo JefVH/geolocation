@@ -5,6 +5,7 @@ namespace geolocation\Console\Commands;
 use geolocation\Coordinate;
 use geolocation\Stop;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class ProcessCoordinates extends Command
 {
@@ -40,31 +41,13 @@ class ProcessCoordinates extends Command
     public function handle()
     {
         $coordinates = Coordinate::notProcessed()->get();
-        $stops = Stop::all();
 
         foreach ($coordinates as $coordinate) {
-            $distance = null;
-            $stop_id = null;
+            $stopQuery = DB::raw('select *, SQRT(POW(69.1 * (lat - ' . $coordinate->lat . '), 2) + POW(69.1 * (' . $coordinate->lon . ' - lon) + COS(lat / 57.3), 2)) as distance from stops order by distance asc');
+            $stop = $stopQuery->first();
 
-            foreach ($stops as $stop) {
-                $calculated_distance = vincentyGreatCircleDistance(
-                    $coordinate->lat,
-                    $coordinate->lon,
-                    $stop->lat,
-                    $stop->lon
-                );
-
-                if ($distance == null) {
-                    $distance = $calculated_distance;
-                    $stop_id = $stop->id;
-                } elseif ($calculated_distance < $distance) {
-                    $distance = $calculated_distance;
-                    $stop_id = $stop->id;
-                }
-            }
-
-            $coordinate->stop_id = $stop_id;
-            $coordinate->stop_distance = $distance;
+            $coordinate->stop_id = $stop->id;
+            $coordinate->stop_distance = $stop->distance;
             $coordinate->save();
         }
     }
