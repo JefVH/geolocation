@@ -46,6 +46,11 @@ class ProcessCoordinates extends Command
 
         $coordinates = Coordinate::notProcessed()->get();
 
+        if (!count($coordinates)) {
+            $this->info('No coordinates found to be processed');
+            exit;
+        }
+
         $coordinatesTable = [];
         foreach ($coordinates as $coordinate) {
             $coordinateArray = [];
