@@ -109,21 +109,22 @@
             $('#start-tracking').on('click', function() {
                 $(this).hide();
                 $('#stop-tracking').show();
-                tracker = $.geolocation.watch({win: addCoordinate, settings: {enableHighAccuracy: true}, fail: trackingFail});
+                tracker = $.geolocation.watch({win: addCoordinate, settings: {enableHighAccuracy: false}, fail: trackingFail});
             });
 
             $('#stop-tracking').on('click', function() {
                 $(this).hide();
                 $('#saving').show();
                 $.geolocation.stop(tracker);
-                saveCoordinates();
             });
 
             function addCoordinate(position)
             {
                 var date = new Date(position.timestamp);
                 var coordinate = [position.coords.latitude, position.coords.longitude, date.toString()];
-                track_coords.push(coordinate);
+                var coordinateJson = JSON.stringify(coordinate);
+
+                saveCoordinate(coordinateJson);
             };
 
             function trackingFail()
@@ -131,23 +132,17 @@
                 alert('Location Tracking is not possible');
             };
 
-            function saveCoordinates() {
-                var track_coords_json = JSON.stringify(track_coords);
-
+            function saveCoordinate(coordinate) {
                 var post_url = "coordinates";
 
-                $.post( post_url, { coords: track_coords_json }, function(data)
+                $.post( post_url, { coordinate }, function(data)
                 {
                     if(data.success)
                     {
-                        $('#saving').hide();
-                        $('#start-tracking').show();
                         location.reload(true);
                     }
                     else
                     {
-                        $('#saving').hide();
-                        $('#start-tracking').show();
                         alert('There was an error saving the tracking data');
                     }
                 });
