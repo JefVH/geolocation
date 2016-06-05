@@ -132,24 +132,20 @@ class TrackController extends Controller
         //
     }
 
-    public function saveCoordinates(Request $request, $id)
+    public function saveCoordinate(Request $request, $id)
     {
         $track = Track::find($id);
 
         if ($track) {
-            $coords =  json_decode($request->get('coords'));
+            $coord =  json_decode($request->get('coord'));
 
-            foreach ($coords as $coord) {
-                $datetime = new Carbon($coord[2]);
+            $coordinate = new Coordinate([
+                    'lat'   => $coord[0],
+                    'lon'   => $coord[1],
+                    'time'  => $coord[2]
+            ]);
 
-                $coordinate = new Coordinate([
-                        'lat'   => $coord[0],
-                        'lon'   => $coord[1],
-                        'time'  => $datetime
-                ]);
-
-                $track->coordinates()->save($coordinate);
-            }
+            $track->coordinates()->save($coordinate);
 
             return response()->json(['success' => true]);
         } else {

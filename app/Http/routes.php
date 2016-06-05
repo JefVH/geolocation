@@ -20,7 +20,7 @@ Route::get('tracks/new', ['as' => 'new_track', 'uses' => 'TrackController@create
 Route::post('tracks/new', ['as' => 'store_track', 'uses' => 'TrackController@store']);
 Route::get('tracks/{id}/view', ['as' => 'view_track', 'uses' => 'TrackController@show']);
 Route::get('tracks/{id}/coordinates', ['as' => 'gettrackcoordinates', 'uses' => 'TrackController@getCoordinates']);
-Route::post('tracks/{id}/coordinates', ['as' => 'savetrackcoordinates', 'uses' => 'TrackController@saveCoordinates']);
+Route::post('tracks/{id}/coordinate', ['as' => 'savetrackcoordinate', 'uses' => 'TrackController@saveCoordinate']);
 
 Route::get('publictransport', ['as' => 'public_transport', 'uses' => 'PublicTransportController@index']);
 Route::get('processcoordinates', ['as' => 'process_coordinates', 'uses' => 'PublicTransportController@processCoordinates']);

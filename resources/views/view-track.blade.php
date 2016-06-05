@@ -133,7 +133,7 @@
             };
 
             function saveCoordinate(coordinate) {
-                var post_url = "coordinates";
+                var post_url = "coordinate";
 
                 $.post( post_url, { coordinate }, function(data)
                 {
