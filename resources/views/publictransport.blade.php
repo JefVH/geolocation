@@ -68,7 +68,7 @@
                                                             <td>{{ $coordinate->lat }}</td>
                                                             <td>{{ $coordinate->lon }}</td>
                                                             <td>{{ !is_null($coordinate->stop_id) ? $coordinate->stop->name : '<i class="fa fa-cog"></i> Processing' }}</td>
-                                                            <td>{!! !is_null($coordinate->stop_distance) ? $coordinate->stop_distance/1000 : '<i class="fa fa-cog"></i> Processing' !!}</td>
+                                                            <td>{!! !is_null($coordinate->stop_distance) ? $coordinate->stop_distance : '<i class="fa fa-cog"></i> Processing' !!}</td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
