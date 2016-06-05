@@ -136,7 +136,10 @@
             function saveCoordinate(coordinate) {
                 var post_url = "coordinate";
 
-                $.post( post_url, { coordinate: coordinate }, function(data)
+                var formData = new FormData();
+                formData.append('coordinate', coordinate);
+
+                $.post( post_url, formData, function(data)
                 {
                     if(data.success)
                     {
