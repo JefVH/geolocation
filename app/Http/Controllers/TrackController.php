@@ -139,6 +139,8 @@ class TrackController extends Controller
         if ($track) {
             $coord =  json_decode($request->get('coord'));
 
+            dd($coord);
+
             $coordinate = new Coordinate([
                     'lat'   => $coord[0],
                     'lon'   => $coord[1],
