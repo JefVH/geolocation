@@ -43,7 +43,7 @@ class ProcessCoordinates extends Command
         $coordinates = Coordinate::notProcessed()->get();
 
         foreach ($coordinates as $coordinate) {
-            $stop = DB::select('SELECT TOP 1 *, SQRT(POW(69.1 * (lat - :lat), 2) + POW(69.1 * (:lon - lon) + COS(lat / 57.3), 2)) as distance from stops order by distance asc', ['lat' => $coordinate->lat, 'lon' => $coordinate->lon]);
+            $stop = DB::select('SELECT *, SQRT(POW(69.1 * (lat - :lat), 2) + POW(69.1 * (:lon - lon) + COS(lat / 57.3), 2)) AS distance FROM stops ORDER BY distance ASC LIMIT 1', ['lat' => $coordinate->lat, 'lon' => $coordinate->lon]);
 
             $coordinate->stop_id = $stop->id;
             $coordinate->stop_distance = $stop->distance;
