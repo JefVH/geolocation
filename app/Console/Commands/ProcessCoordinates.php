@@ -67,6 +67,8 @@ class ProcessCoordinates extends Command
         foreach ($coordinates as $coordinate) {
             $stop = DB::select('SELECT *, SQRT(POW(69.1 * (lat - :lat), 2) + POW(69.1 * (:lon - lon) + COS(lat / 57.3), 2)) AS distance FROM stops ORDER BY distance ASC LIMIT 1', ['lat' => $coordinate->lat, 'lon' => $coordinate->lon]);
 
+            dd($stop);
+            
             $coordinate->stop_id = $stop->id;
             $coordinate->stop_distance = $stop->distance;
             $coordinate->save();
