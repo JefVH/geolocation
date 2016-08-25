@@ -70,12 +70,13 @@ class ProcessCoordinates extends Command
         $bar = $this->output->createProgressBar(count($coordinates));
 
         foreach ($coordinates as $coordinate) {
-            $stop = DB::select('SELECT *, SQRT(POW(69.1 * (lat - :lat), 2) + POW(69.1 * (:lon - lon) + COS(lat / 57.3), 2)) AS distance FROM stops ORDER BY distance ASC LIMIT 1', ['lat' => $coordinate->lat, 'lon' => $coordinate->lon]);
+            $stop = DB::select(DB::raw('SELECT *, ROUND(6367 * ACOS(COS(RADIANS(lat)) * COS(RADIANS(:lat)) * COS(RADIANS(:lon) - RADIANS(lon)) + SIN(RADIANS(lat)) * SIN(RADIANS(:lat2))), 3) AS distance FROM stops ORDER BY distance ASC LIMIT 1'), ['lat' => $coordinate->lat, 'lon' => $coordinate->lon, 'lat2' => $coordinate->lat]);
 
-            $coordinate->stop_id = $stop[0]->id;
-            $coordinate->stop_distance = $stop[0]->distance;
-            $coordinate->processed = 1;
-            $coordinate->save();
+            $coordinate->update([
+                'stop_id' => $stop[0]->id,
+                'stop_distance' => $stop[0]->distance,
+                'processed' => 1
+            ]);
 
             $bar->advance();
         }

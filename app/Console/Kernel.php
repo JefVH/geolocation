@@ -2,7 +2,9 @@
 
 namespace geolocation\Console;
 
+use geolocation\Console\Commands\CalculateRoute;
 use geolocation\Console\Commands\ProcessCoordinates;
+use geolocation\Console\Commands\ResetCoordinates;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -14,7 +16,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        ProcessCoordinates::class
+        ProcessCoordinates::class,
+        CalculateRoute::class,
+        ResetCoordinates::class
     ];
 
     /**

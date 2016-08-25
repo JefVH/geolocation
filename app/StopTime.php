@@ -1,12 +1,10 @@
-<?php
-
-namespace geolocation;
+<?php namespace geolocation;
 
 use Illuminate\Database\Eloquent\Model;
 
 class StopTime extends Model
 {
-	$table = 'stop_times';
+    protected $table = 'stop_times';
 
     public function trip()
     {

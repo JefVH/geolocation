@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class CalendarDate extends Model
 {
-    $table = 'calendar_dates';
+    protected $table = 'calendar_dates';
 }
