@@ -30,5 +30,6 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('coordinates:process')->everyFiveMinutes()->withoutOverlapping();
+        $schedule->command('routes:calculate')->everyFiveMinutes()->withoutOverlapping();
     }
 }
