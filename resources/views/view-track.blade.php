@@ -53,11 +53,11 @@
                     <div class="col-md-12">
                         <h3>Processed Information</h3>
                         <label>Probable Trip Headsign</label>
-                        <p>{{ !is_null($trip->headsign) ? $trip->headsign : 'Not Processed' }}</p>
+                        <p>{{ !is_null($trip) ? $trip->headsign : 'Not Processed' }}</p>
                         <label>Probable Hop-on Stop</label>
-                        <p>{{ !is_null($startStop->name) ?  $startStop->name : 'Not Processed' }}</p>
+                        <p>{{ !is_null($startStop) ?  $startStop->name : 'Not Processed' }}</p>
                         <label>Probable Hop-off Stop</label>
-                        <p>{{ !is_null($endStop->name) ? $endStop->name : 'Not Processed' }}</p>
+                        <p>{{ !is_null($endStop) ? $endStop->name : 'Not Processed' }}</p>
                     </div>
                 </div>
                 <div class="row">
