@@ -64,10 +64,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h3>Map</h3>
-                            <div class="col-md-2">
-                                <div id="gmap_controls"></div>
-                            </div>
-                            <div class="col-md-10">
+                            <div class="col-md-12">
                                 <div id="map" style="width: 100%; height: 600px;"></div>
                             </div>
                         </div>
