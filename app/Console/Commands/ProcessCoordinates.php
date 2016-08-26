@@ -51,22 +51,6 @@ class ProcessCoordinates extends Command
             exit;
         }
 
-        $coordinatesTable = [];
-        foreach ($coordinates as $coordinate) {
-            $coordinateArray = [];
-
-            $coordinateArray['track'] = $coordinate->track->name;
-            $coordinateArray['latitude'] = $coordinate->lat;
-            $coordinateArray['longitude'] = $coordinate->lon;
-            $coordinateArray['time'] = $coordinate->time;
-
-            array_push($coordinatesTable, $coordinateArray);
-        }
-
-        $headers = ['Track', 'Latitude', 'Longitude', 'Time'];
-
-        $this->table($headers, $coordinatesTable);
-
         $bar = $this->output->createProgressBar(count($coordinates));
 
         foreach ($coordinates as $coordinate) {

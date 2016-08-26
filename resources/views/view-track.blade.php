@@ -51,6 +51,17 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
+                        <h3>Processed Information</h3>
+                        <label>Probable Trip Headsign</label>
+                        <p>{{ !is_null($trip->headsign) ? $trip->headsign : 'Not Processed' }}</p>
+                        <label>Probable Hop-on Stop</label>
+                        <p>{{ !is_null($startStop->name) ?  $startStop->name : 'Not Processed' }}</p>
+                        <label>Probable Hop-off Stop</label>
+                        <p>{{ !is_null($endStop->name) ? $endStop->name : 'Not Processed' }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
                         <h3>Information</h3>
                         <label>Name</label>
                         <p>{{ $track->name }}</p>
@@ -61,29 +72,6 @@
                     </div>
                 </div>
                 @if(isset($coordinates))
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3>Coordinates</h3>
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Latitude</th>
-                                        <th>Longitude</th>
-                                        <th>Time</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($coordinates as $coordinate)
-                                        <tr>
-                                            <td>{{ $coordinate->lat }}</td>
-                                            <td>{{ $coordinate->lon }}</td>
-                                            <td>{{ $coordinate->time }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-md-12">
                             <h3>Map</h3>

@@ -2,6 +2,7 @@
 
 namespace geolocation\Http\Controllers;
 
+use geolocation\Trip;
 use Illuminate\Http\Request;
 
 use Carbon\Carbon;
@@ -63,6 +64,16 @@ class TrackController extends Controller
     {
         $track = Track::find($id);
 
+        $trip = null;
+        $startStop = null;
+        $endStop = null;
+
+        if ($track->processed) {
+            $trip = Trip::find($track->trip_id);
+            $startStop = Stop::find($track->start_stop_id);
+            $endStop = Stop::find($track->end_stop_id);
+        }
+
         $coordinates = $track->coordinates()->orderBy('time', 'asc')->get();
         $coordinatesFiltered = DB::table('coordinates')
             ->select('lat', 'lon')
@@ -90,11 +101,18 @@ class TrackController extends Controller
 
             return view('view-track')
                     ->with('track', $track)
+                    ->with('trip', $trip)
+                    ->with('startStop', $startStop)
+                    ->with('endStop', $endStop)
                     ->with('coordinates', $coordinates)
                     ->with('map_coordinates', $mapCoordinatesJson)
                     ->with('map_center', $coords_array[$index]);
         } else {
-            return view('view-track', compact('track'));
+            return view('view-track')
+                ->with('track', $track)
+                ->with('trip', $trip)
+                ->with('startStop', $startStop)
+                ->with('endStop', $endStop);
         }
     }
 
