@@ -29,7 +29,6 @@
                     <li><a href="{{ url() }}"><i class="fa fa-home"></i>&nbsp;Home <span class="sr-only"></span></a></li>
                     <li><a href="{{ route('new_track') }}"><i class="fa fa-location-arrow"></i>&nbsp;Track</a></li>
                     <li class="active"><a href="#"><i class="fa fa-history"></i>&nbsp;History</a></li>
-                    <li><a href="{{ route('public_transport') }}"><i class="fa fa-bus"></i>&nbsp;Public Transport</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container -->
@@ -49,7 +48,6 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Created</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -57,7 +55,6 @@
                                 @foreach($tracks as $track)
                                     <tr>
                                         <td>{{ $track->name }}</td>
-                                        <td>{{ $track->created_at }}</td>
                                         <td><a href="{{ route('view_track', $track->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></a></td>
                                     </tr>
                                 @endforeach

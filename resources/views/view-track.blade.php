@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <title>Geolocation</title>
@@ -32,7 +32,6 @@
                     <li><a href="{{ url() }}"><i class="fa fa-home"></i>&nbsp;Home <span class="sr-only"></span></a></li>
                     <li class="active"><a href="#"><i class="fa fa-location-arrow"></i>&nbsp;Track</a></li>
                     <li><a href="{{ route('tracks') }}"><i class="fa fa-history"></i>&nbsp;History</a></li>
-                    <li><a href="{{ route('public_transport') }}"><i class="fa fa-bus"></i>&nbsp;Public Transport</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container -->
