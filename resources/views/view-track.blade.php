@@ -60,17 +60,6 @@
                         <p>{{ !is_null($endStop) ? $endStop->name : 'Not Processed' }}</p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Information</h3>
-                        <label>Name</label>
-                        <p>{{ $track->name }}</p>
-                        <label>Created</label>
-                        <p>{{ $track->created_at }}</p>
-                        <label>Last Updated</label>
-                        <p>{{ $track->updated_at }}</p>
-                    </div>
-                </div>
                 @if(isset($coordinates))
                     <div class="row">
                         <div class="col-md-12">
