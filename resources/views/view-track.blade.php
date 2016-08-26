@@ -133,9 +133,11 @@
                 new Maplace({
                     locations: {{ $map_coordinates }},
                     map_div: '#map',
+                    generate_controls: false,
                     controls_div: '#gmap_controls',
                     controls_type: 'list',
                     controls_on_map: false,
+                    view_all: false,
                     view_all_text: 'All Coordinates',
                     type: 'polyline'
                 }).Load();
