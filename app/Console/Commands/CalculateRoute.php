@@ -53,7 +53,7 @@ class CalculateRoute extends Command
         foreach ($tracks as $track) {
             $stops = [];
 
-            $cooinates = DB::select(
+            $coordinates = DB::select(
                 DB::raw('SELECT t1.* FROM coordinates t1 LEFT JOIN coordinates t2 ON t1.stop_id = t2.stop_id AND t1.stop_distance > t2.stop_distance WHERE t2.stop_distance IS NULL AND t1.track_id = :trackId order by t1.time asc'),
                 [
                     'trackId' => $track->id
