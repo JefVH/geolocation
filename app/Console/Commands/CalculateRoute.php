@@ -93,7 +93,7 @@ class CalculateRoute extends Command
                     $arrivalTime = Carbon::parse($stopTime->arrival_time);
                     $departureTime = Carbon::parse($stopTime->departure_time);
 
-                    if (($start->diffInMinutes($arrivalTime) < 5) && $end->diffInMinutes($departureTime) < 5) {
+                    if (($start->diffInMinutes($arrivalTime) < 10) && $end->diffInMinutes($departureTime) < 10) {
                         array_push($trips, $stopTime->trip_id);
                     }
                 }
